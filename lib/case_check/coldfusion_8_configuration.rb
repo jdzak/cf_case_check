@@ -8,7 +8,9 @@ class Coldfusion8Configuration
   
   def initialize(cf_root)
     @cf_root = cf_root
-    @doc = REXML::Document.new( File.join(@cf_root, PATH, FILENAME) )
+    absolute_filename = File.join(@cf_root, PATH, FILENAME)
+    f = File.new(absolute_filename)
+    @doc = REXML::Document.new(f)
     apply
   end
   
@@ -32,20 +34,20 @@ class Coldfusion8Configuration
   private
   def custom_tag_directories
     absolutize_directories(read_all_dirs).reject do |d|
-      Dir[d, '**', '*.cfm'].empty?
+      Dir["#{d}/**/*.cfm"].empty?
     end
   end
   
   def cfc_directories
     absolutize_directories(read_all_dirs).reject do |d|
-      Dir[d, '**', '*.cfm'].empty?
+      Dir["#{d}/**/*.cfc"].empty?
     end
   end
   
   def read_all_dirs
     custom_elements = []
     @doc.elements.each("//var") { |elt| custom_elements << elt if elt.attributes["name"] =~ /customtags/ }
-    custom_elements.inject([]){|dirs, c| dirs << c.elements["string/child::text()"]}
+    custom_elements.inject([]){ |dirs, c| dirs << c.elements["string/child::text()"].to_s }
   end
   
   def absolutize_directories(dirs)
@@ -57,18 +59,6 @@ class Coldfusion8Configuration
         Pathname.new(File.dirname(@filename)) + p
       end
     }.collect { |p| p.to_s }
-  end
-  
-  class Directory
-    def contai
-      Dir['**/*.*']
-    end
-  end
-  
-  class CustomTagDirectory
-    def valid
-      
-    end
   end
 end
 

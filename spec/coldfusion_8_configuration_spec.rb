@@ -43,8 +43,8 @@ describe CaseCheck::Coldfusion8Configuration do
   end
   
   it "should read customtag directories from neo-runtime.xml" do
-    touch('/tmp/cf_case_check/customtags/foo.cfm')
-    touch('/tmp/cf_case_check/misc/bar.cfm')
+    touch('/tmp/cf_case_check/customtags/alpha.cfm')
+    touch('/tmp/cf_case_check/misc/beta.cfm')
     
     build_config
     
@@ -52,12 +52,12 @@ describe CaseCheck::Coldfusion8Configuration do
   end
   
   it "should read cfc directories from neo-runtime.xml" do
-    touch('/tmp/cf_case_check/cfcs/bar.cfc')
-    touch('/tmp/cf_case_check/misc/foo.cfc')
+    touch('/tmp/cf_case_check/cfcs/gamma.cfc')
+    touch('/tmp/cf_case_check/misc/delta.cfc')
     
     build_config
     
-    CaseCheck::CustomTag.directories.should == %w(/tmp/cf_case_check/cfcs /tmp/cf_case_check/customtags)
+    CaseCheck::Cfc.directories.should == %w(/tmp/cf_case_check/cfcs /tmp/cf_case_check/misc)
   end
   
 end
