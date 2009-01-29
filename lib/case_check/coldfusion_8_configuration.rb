@@ -4,13 +4,13 @@ require "rexml/document"
 module CaseCheck
 
 class Coldfusion8Configuration
-  PATH, FILENAME = 'lib', 'neo-runtime.xml'
+  PATH, CONFIG_FILENAME = 'lib', 'neo-runtime.xml'
   
   def initialize(cf_root)
     @cf_root = cf_root
-    absolute_filename = File.join(@cf_root, PATH, FILENAME)
-    f = File.new(absolute_filename)
-    @doc = REXML::Document.new(f)
+    absolute_filename = File.join(@cf_root, PATH, CONFIG_FILENAME)
+    config = File.new(absolute_filename)
+    @doc = REXML::Document.new(config)
     apply
   end
   
