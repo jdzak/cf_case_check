@@ -72,6 +72,34 @@ describe CaseCheck::Params do
     end
   end
   
+  describe "--cf-root directory" do
+    class Coldfusion8ConfigStub
+      def initialize(root)
+        apply
+      end
+      
+      def apply
+        CaseCheck::Cfc.directories = %w(/mock/cfc/directory)
+      end 
+    end
+    
+    before do
+      @cf_root = '/cf_root'
+
+      File.should_receive(:exist?).with('./cf_case_check.yml').and_return(false)
+      File.should_receive(:exist?).with(@cf_root).any_number_of_times.and_return(true)
+
+      @config = Coldfusion8ConfigStub.new(@cf_root)
+    end
+    
+    it "load the coldfusion 8 configuration" do
+      CaseCheck::Coldfusion8Configuration.should_receive(:new).and_return(@config)
+      actual_params('--cf-root', @cf_root)
+      CaseCheck::Cfc.directories.should ==  %w(/mock/cfc/directory)
+    end
+    
+  end
+  
   describe "--version" do
     it "prints to configured stderr" do
       CaseCheck.should_receive(:exit)

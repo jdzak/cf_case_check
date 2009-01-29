@@ -34,7 +34,7 @@ class Coldfusion8Configuration
   private
   def custom_tag_directories
     absolutize_directories(read_all_dirs).reject do |d|
-      Dir["#{d}/**/*.cfm"].empty?
+      (Dir["#{d}/**/*.cfm"] + Dir["#{d}/**/*.tem"]).empty?
     end
   end
   

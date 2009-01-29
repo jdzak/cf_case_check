@@ -20,6 +20,11 @@ module CaseCheck
           @options.configfile = p
         end
         
+        opts.on("-cf", "--cf-root COLDFUSION_DIRECTORY", 
+                "The coldfusion installation's root directory.") do |p|
+          @options.cf_root = p
+        end
+        
         opts.on("-v", "--verbose", "Show all references, including the ones which can be resolved exactly.") do |v|
           @options.verbose = true
         end
@@ -46,6 +51,10 @@ module CaseCheck
       @options.configfile || File.join(directory, "cf_case_check.yml")
     end
     
+    def coldfusion_root
+      @options.cf_root || '/opt/coldfusion8'
+    end
+    
     def verbose?
       @options.verbose
     end
@@ -56,6 +65,8 @@ module CaseCheck
       @configuration = 
         if File.exist?(configuration_file)
           Configuration.new(configuration_file)
+        elsif File.exist?(coldfusion_root)
+          Coldfusion8Configuration.new(coldfusion_root)
         end
     end
   end
