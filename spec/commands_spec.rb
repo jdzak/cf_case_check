@@ -94,7 +94,7 @@ describe CaseCheck::Params do
     
     it "load the coldfusion 8 configuration" do
       CaseCheck::Coldfusion8Configuration.should_receive(:new).and_return(@config)
-      actual_params('--cf-root', @cf_root)
+      actual_params('--auto-configure', @cf_root)
       CaseCheck::Cfc.directories.should ==  %w(/mock/cfc/directory)
     end
     

@@ -20,8 +20,8 @@ module CaseCheck
           @options.configfile = p
         end
         
-        opts.on("-cf", "--cf-root COLDFUSION_DIRECTORY", 
-                "The coldfusion installation's root directory.") do |p|
+        opts.on("-a", "--auto-configure DIRECTORY", 
+                "Automatically configure the directories to search for custom tag and CFCs using the file which stores this information for Coldfusion 8.") do |p|
           @options.cf_root = p
         end
         
