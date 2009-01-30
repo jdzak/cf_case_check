@@ -45,9 +45,7 @@ class Coldfusion8Configuration
   end
   
   def read_all_dirs
-    custom_elements = []
-    @doc.elements.each("//var") { |elt| custom_elements << elt if elt.attributes["name"] =~ /customtags/ }
-    custom_elements.inject([]){ |dirs, c| dirs << c.elements["string/child::text()"].to_s }
+    @doc.elements.collect("//var[contains(@name,'customtag')]/string") { |e| e.text }
   end
   
   def absolutize_directories(dirs)
