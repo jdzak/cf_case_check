@@ -12,7 +12,7 @@ module CaseCheck
         
         opts.on("-d", "--dir DIRECTORY", 
                 "The application root from which to search.  Defaults to the current directory.") do |p|
-          @options.directory = p
+          @options.source_directory = p
         end
         
         opts.on("-c", "--config CONFIGYAML", 
@@ -21,8 +21,8 @@ module CaseCheck
         end
         
         opts.on("-a", "--auto-configure DIRECTORY", 
-                "Automatically configure the directories to search for custom tag and CFCs using the file which stores this information for Coldfusion 8.") do |p|
-          @options.cf_root = p
+                "Automatically configure the directories to search for custom tag and CFCs using the Coldfusion configuration.  (Coldfusion 8 Specific).") do |p|
+          @options.coldfusion_directory = p
         end
         
         opts.on("-v", "--verbose", "Show all references, including the ones which can be resolved exactly.") do |v|
@@ -43,16 +43,20 @@ module CaseCheck
       read_config!
     end
     
-    def directory
-      @options.directory || '.'
+    def source_directory
+      @options.source_directory || '.'
     end
     
     def configuration_file
-      @options.configfile || File.join(directory, "cf_case_check.yml")
+      @options.configfile || File.join(source_directory, "cf_case_check.yml")
     end
     
-    def coldfusion_root
-      @options.cf_root || '/opt/coldfusion8'
+    def coldfusion_directory
+      @options.coldfusion_directory || '/opt/coldfusion8'
+    end
+    
+    def coldfusion_directory_given
+      @options.coldfusion_directory
     end
     
     def verbose?
@@ -63,10 +67,10 @@ module CaseCheck
     
     def read_config!
       @configuration = 
-        if File.exist?(configuration_file)
+        if coldfusion_directory_given && File.exist?(coldfusion_directory)
+          Coldfusion8Configuration.new(coldfusion_directory)
+        elsif File.exist?(configuration_file)
           Configuration.new(configuration_file)
-        elsif File.exist?(coldfusion_root)
-          Coldfusion8Configuration.new(coldfusion_root)
         end
     end
   end
@@ -76,7 +80,7 @@ module CaseCheck
       @params = params
       CaseCheck.status_stream.print "Reading source files "
       @sources = extensions.collect { 
-        |ext| [ext, Dir.glob("#{params.directory}/**/*.#{ext}", File::FNM_CASEFOLD)]
+        |ext| [ext, Dir.glob("#{params.source_directory}/**/*.#{ext}", File::FNM_CASEFOLD)]
       }.collect do |ext, files|
         CaseCheck.status_stream.print "#{ext}: " unless files.empty?
         files.collect do |f|

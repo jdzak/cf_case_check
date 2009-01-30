@@ -22,11 +22,11 @@ describe CaseCheck::Params do
     
     it "makes the directory available" do
       actual = actual_params('--dir', @dirname)
-      actual.directory.should == @dirname
+      actual.source_directory.should == @dirname
     end
     
     it "defaults the directory to the current" do
-      actual_params.directory.should == '.'
+      actual_params.source_directory.should == '.'
     end
     
     it "reads the configuration directory/cf_case_check.yml" do
@@ -72,7 +72,7 @@ describe CaseCheck::Params do
     end
   end
   
-  describe "--cf-root directory" do
+  describe "--auto-configure directory" do
     class Coldfusion8ConfigStub
       def initialize(root)
         apply
@@ -84,9 +84,8 @@ describe CaseCheck::Params do
     end
     
     before do
-      @cf_root = '/cf_root'
+      @cf_root = '/coldfusion_root'
 
-      File.should_receive(:exist?).with('./cf_case_check.yml').and_return(false)
       File.should_receive(:exist?).with(@cf_root).any_number_of_times.and_return(true)
 
       @config = Coldfusion8ConfigStub.new(@cf_root)
