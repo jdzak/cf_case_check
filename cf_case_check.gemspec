@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{cf_case_check}
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rhett Sutphin"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email = %q{rhett@detailedbalance.net}
   s.executables = ["cf_case_check"]
   s.extra_rdoc_files = ["History.txt", "README.txt", "bin/cf_case_check"]
-  s.files = [".gitignore", "History.txt", "Manifest.txt", "README.txt", "Rakefile", "bin/cf_case_check", "lib/case_check.rb", "lib/case_check/coldfusion_source.rb", "lib/case_check/commands.rb", "lib/case_check/configuration.rb", "lib/case_check/core-ext.rb", "lib/case_check/reference.rb", "lib/case_check/references/cfc.rb", "lib/case_check/references/cfinclude.rb", "lib/case_check/references/cfmodule.rb", "lib/case_check/references/custom_tag.rb", "spec/coldfusion_source_spec.rb", "spec/commands_spec.rb", "spec/configuration_spec.rb", "spec/core_ext_spec.rb", "spec/reference_spec.rb", "spec/references/cfc_spec.rb", "spec/references/cfinclude_spec.rb", "spec/references/cfmodule_spec.rb", "spec/references/custom_tag_spec.rb", "spec/spec_helper.rb"]
+  s.files = [".gitignore", "History.txt", "Manifest.txt", "README.txt", "Rakefile", "bin/cf_case_check", "lib/case_check.rb", "lib/case_check/coldfusion_source.rb", "lib/case_check/commands.rb", "lib/case_check/configuration.rb", "lib/case_check/coldfusion_8_configuration.rb", "lib/case_check/core-ext.rb", "lib/case_check/reference.rb", "lib/case_check/references/cfc.rb", "lib/case_check/references/cfinclude.rb", "lib/case_check/references/cfmodule.rb", "lib/case_check/references/custom_tag.rb", "spec/coldfusion_source_spec.rb", "spec/commands_spec.rb", "spec/configuration_spec.rb", "spec/coldfusion_8_configuration_spec.rb", "spec/core_ext_spec.rb", "spec/reference_spec.rb", "spec/references/cfc_spec.rb", "spec/references/cfinclude_spec.rb", "spec/references/cfmodule_spec.rb", "spec/references/custom_tag_spec.rb", "spec/spec_helper.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://github.com/rsutphin/cf_case_check}
   s.rdoc_options = ["--main", "README.txt"]
