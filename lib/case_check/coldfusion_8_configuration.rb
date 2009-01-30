@@ -44,7 +44,7 @@ class Coldfusion8Configuration
     end
   end
   
-  def read_all_dirs
+  def all_dirs
     @doc.elements.collect("//var[contains(@name,'customtag')]/string") { |e| e.text }
   end
   
