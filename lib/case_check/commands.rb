@@ -21,7 +21,7 @@ module CaseCheck
         end
         
         opts.on("-a", "--auto-configure DIRECTORY", 
-                "Automatically configure the directories to search for custom tag and CFCs using the Coldfusion configuration.  (Coldfusion 8 Specific).") do |p|
+                "Automatically configure the directories to search for custom tag and CFCs using Coldfusion's configuration.  (Coldfusion 8 Only)") do |p|
           @options.coldfusion_directory = p
         end
         
