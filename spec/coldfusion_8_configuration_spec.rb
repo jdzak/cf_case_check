@@ -8,15 +8,16 @@ describe CaseCheck::Coldfusion8Configuration do
     neo_runtime = {
       :filename => "/tmp/cf_case_check/lib/neo-runtime.xml",
       :contents => <<-XML
-      <wddxPacket version='1.0'>        
-        <data>
-          <struct type='coldfusion.server.ConfigMap'>
-            <var name='/WEB-INF/customtags1207698058868'><string>/tmp/cf_case_check/customtags</string></var>
-            <var name='/WEB-INF/customtags1207758745211'><string>/tmp/cf_case_check/cfcs</string></var>
-            <var name='/WEB-INF/customtags1207773084805'><string>/tmp/cf_case_check/misc</string></var>
-          </struct>
-        </data>
-      </wddxPacket>
+        <wddxPacket version='1.0'>        
+          <data>
+            <struct type='coldfusion.server.ConfigMap'>
+              <var name='/WEB-INF/customtags1207698058868'><string>/tmp/cf_case_check/customtags</string></var>
+              <var name='/WEB-INF/customtags1207758745211'><string>/tmp/cf_case_check/cfcs</string></var>
+              <var name='/WEB-INF/customtags1207773084805'><string>/tmp/cf_case_check/misc</string></var>
+              <wrong name='no/customtags/here'><string>fail</string></wrong>
+            </struct>
+          </data>
+        </wddxPacket>
       XML
     }
      
