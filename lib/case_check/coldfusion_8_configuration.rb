@@ -33,18 +33,18 @@ class Coldfusion8Configuration
   
   private
   def custom_tag_directories
-    absolutize_directories(read_all_dirs).reject do |d|
+    absolutize_directories(all_directories).reject do |d|
       (Dir["#{d}/**/*.cfm"] + Dir["#{d}/**/*.tem"]).empty?
     end
   end
   
   def cfc_directories
-    absolutize_directories(read_all_dirs).reject do |d|
+    absolutize_directories(all_directories).reject do |d|
       Dir["#{d}/**/*.cfc"].empty?
     end
   end
   
-  def all_dirs
+  def all_directories
     @doc.elements.collect("//var[contains(@name,'customtag')]/string") { |e| e.text }
   end
   
