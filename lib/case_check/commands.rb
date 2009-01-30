@@ -68,7 +68,7 @@ module CaseCheck
     def read_config!
       @configuration = 
         if coldfusion_directory_given && File.exist?(coldfusion_directory)
-          Coldfusion8Configuration.new(coldfusion_directory)
+          CaseCheck::Coldfusion8Configuration.new(coldfusion_directory)
         elsif File.exist?(configuration_file)
           Configuration.new(configuration_file)
         end
